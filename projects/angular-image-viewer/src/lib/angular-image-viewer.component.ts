@@ -206,9 +206,9 @@ export class AngularImageViewerComponent implements OnInit, OnChanges {
 
   private canNavigate(event: any) {
     if (event.type === 'keyup') {
-      return event == null || (this.config.allowKeyboardNavigation && this.hovered);
+      return (this.config.allowKeyboardNavigation && this.hovered);
     } else if (event.type === 'click') {
-      return event == null || this.hovered;
+      return this.hovered;
     }
   }
 
