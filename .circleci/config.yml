@@ -21,7 +21,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - dependencies-
 
-      - run: npm install
+      - run: yarn
       - run:
           name: Run tests
           command: echo 'noop'
@@ -41,7 +41,7 @@ jobs:
           at: ~/repo
       - run:
           name: Build the package
-          command: npm install && ng build angular-image-viewer --prod
+          command: yarn && ng build angular-image-viewer --prod
       - run:
           name: Authenticate with registry
           command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/repo/.npmrc
