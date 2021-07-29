@@ -51,7 +51,10 @@ export class AppComponent {
     // console.log(`${event.name} has been click on img ${event.imageIndex + 1}`);
     switch (event.name) {
       case 'print':
-        // console.log('run print logic');
+        alert('custom buttons and events can be passed in via config')
+        break;
+      case 'link':
+        alert('custom buttons and events can be passed in via config')
         break;
     }
   }
