@@ -1,14 +1,25 @@
-import { Component, OnInit, HostListener, Optional, Inject, Input, Output,
-  EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
-import { ImageViewerConfig } from './models/image-viewer-config.model';
-import { CustomImageEvent } from './models/custom-image-event-model';
-import { CdkDrag } from '@angular/cdk/drag-drop';
+import {
+  Component,
+  OnInit,
+  HostListener,
+  Optional,
+  Inject,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from "@angular/core";
+import { ImageViewerConfig } from "./models/image-viewer-config.model";
+import { CustomImageEvent } from "./models/custom-image-event-model";
+import { CdkDrag } from "@angular/cdk/drag-drop";
 
 const DEFAULT_CONFIG: ImageViewerConfig = {
-  btnClass: 'default',
+  btnClass: "default",
   zoomFactor: 0.1,
-  containerBackgroundColor: '#e4dede',
-  primaryColor: '',
+  containerBackgroundColor: "#e4dede",
+  primaryColor: "",
   wheelZoom: false,
   allowFullscreen: true,
   allowKeyboardNavigation: true,
@@ -18,28 +29,27 @@ const DEFAULT_CONFIG: ImageViewerConfig = {
     rotateClockwise: true,
     rotateCounterClockwise: true,
     next: true,
-    prev: true
+    prev: true,
   },
   btnIcons: {
-    zoomIn: 'fa fa-plus',
-    zoomOut: 'fa fa-minus',
-    rotateClockwise: 'fa fa-refresh',
-    rotateCounterClockwise: 'fa fa-undo',
-    next: 'fa fa-chevron-right',
-    prev: 'fa fa-chevron-left',
-    fullscreen: 'fa fa-arrows-alt',
-  }
+    zoomIn: "fa fa-plus",
+    zoomOut: "fa fa-minus",
+    rotateClockwise: "fa fa-refresh",
+    rotateCounterClockwise: "fa fa-undo",
+    next: "fa fa-chevron-right",
+    prev: "fa fa-chevron-left",
+    fullscreen: "fa fa-arrows-alt",
+  },
 };
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'angular-image-viewer',
-  templateUrl: './angular-image-viewer.component.html',
-  styleUrls: ['./angular-image-viewer.component.scss']
+  selector: "angular-image-viewer",
+  templateUrl: "./angular-image-viewer.component.html",
+  styleUrls: ["./angular-image-viewer.component.scss"],
 })
 export class AngularImageViewerComponent implements OnInit, OnChanges {
-
-  @ViewChild(CdkDrag, {static: true}) cdkDrag: CdkDrag;
+  @ViewChild(CdkDrag, { static: true }) cdkDrag: CdkDrag;
 
   @Input()
   src: string[];
@@ -48,7 +58,7 @@ export class AngularImageViewerComponent implements OnInit, OnChanges {
   config: ImageViewerConfig;
 
   @Input()
-  screenHeightOccupied: 0;             // In Px
+  screenHeightOccupied: 0; // In Px
 
   @Input()
   index = 0;
@@ -58,10 +68,10 @@ export class AngularImageViewerComponent implements OnInit, OnChanges {
 
   @Input()
   footerTexts = [
-    'Image',
-    'of',
-    'View previous or next image',
-    'using < > on the keyboard'
+    "Image",
+    "of",
+    "View previous or next image",
+    "using < > on the keyboard",
   ];
 
   @Output()
@@ -73,9 +83,17 @@ export class AngularImageViewerComponent implements OnInit, OnChanges {
   @Output()
   customImageEvent: EventEmitter<CustomImageEvent> = new EventEmitter();
 
-  styleHeight = '98vh';
+  @Output()
+  imageNotFoundEvent = new EventEmitter();
 
-  public style = { transform: '', msTransform: '', oTransform: '', webkitTransform: '' };
+  styleHeight = "98vh";
+
+  public style = {
+    transform: "",
+    msTransform: "",
+    oTransform: "",
+    webkitTransform: "",
+  };
   public fullscreen = false;
   public loading = true;
   public isDragOn = false;
@@ -83,11 +101,13 @@ export class AngularImageViewerComponent implements OnInit, OnChanges {
   private rotation = 0;
   private hovered = false;
 
-  constructor(@Optional() @Inject('config') public moduleConfig: ImageViewerConfig) { }
+  constructor(
+    @Optional() @Inject("config") public moduleConfig: ImageViewerConfig
+  ) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.screenHeightOccupied) {
-      this.styleHeight = 'calc(98vh - ' + this.screenHeightOccupied + 'px)';
+      this.styleHeight = "calc(98vh - " + this.screenHeightOccupied + "px)";
     } else if (changes.index) {
       this.reset();
     }
@@ -99,7 +119,7 @@ export class AngularImageViewerComponent implements OnInit, OnChanges {
     this.triggerConfigBinding();
   }
 
-  @HostListener('window:keyup.ArrowRight', ['$event'])
+  @HostListener("window:keyup.ArrowRight", ["$event"])
   nextImage(event) {
     if (this.canNavigate(event) && this.index < this.src.length - 1) {
       this.loading = true;
@@ -109,7 +129,7 @@ export class AngularImageViewerComponent implements OnInit, OnChanges {
     }
   }
 
-  @HostListener('window:keyup.ArrowLeft', ['$event'])
+  @HostListener("window:keyup.ArrowLeft", ["$event"])
   prevImage(event) {
     if (this.canNavigate(event) && this.index > 0) {
       this.loading = true;
@@ -120,13 +140,13 @@ export class AngularImageViewerComponent implements OnInit, OnChanges {
   }
 
   zoomIn() {
-    this.scale *= (1 + this.config.zoomFactor);
+    this.scale *= 1 + this.config.zoomFactor;
     this.updateStyle();
   }
 
   zoomOut() {
     if (this.scale > this.config.zoomFactor) {
-      this.scale /= (1 + this.config.zoomFactor);
+      this.scale /= 1 + this.config.zoomFactor;
     }
     this.updateStyle();
   }
@@ -157,12 +177,17 @@ export class AngularImageViewerComponent implements OnInit, OnChanges {
   }
 
   imageNotFound() {
+    this.imageNotFoundEvent.emit();
   }
 
   onDragStart(evt) {
-    if (evt.source._dragRef._initialTransform && evt.source._dragRef._initialTransform.length > 0) {
-      const myTranslate = evt.source._dragRef._initialTransform.split(' rotate')[0];
-      const myRotate = this.style.transform.split(' rotate')[1];
+    if (
+      evt.source._dragRef._initialTransform &&
+      evt.source._dragRef._initialTransform.length > 0
+    ) {
+      const myTranslate =
+        evt.source._dragRef._initialTransform.split(" rotate")[0];
+      const myRotate = this.style.transform.split(" rotate")[1];
       evt.source._dragRef._initialTransform = `${myTranslate} rotate${myRotate}`;
     } else {
       evt.source._dragRef._initialTransform = this.style.transform;
@@ -195,20 +220,20 @@ export class AngularImageViewerComponent implements OnInit, OnChanges {
     this.cdkDrag.reset();
   }
 
-  @HostListener('mouseover')
+  @HostListener("mouseover")
   onMouseOver() {
     this.hovered = true;
   }
 
-  @HostListener('mouseleave')
+  @HostListener("mouseleave")
   onMouseLeave() {
     this.hovered = false;
   }
 
   private canNavigate(event: any) {
-    if (event.type === 'keyup') {
-      return (this.config.allowKeyboardNavigation && this.hovered);
-    } else if (event.type === 'click') {
+    if (event.type === "keyup") {
+      return this.config.allowKeyboardNavigation && this.hovered;
+    } else if (event.type === "click") {
       return this.hovered;
     }
   }
@@ -217,16 +242,21 @@ export class AngularImageViewerComponent implements OnInit, OnChanges {
     this.style.transform = `rotate(${this.rotation}deg) scale(${this.scale})`;
   }
 
-  private mergeConfig(defaultValues: ImageViewerConfig, overrideValues: ImageViewerConfig): ImageViewerConfig {
+  private mergeConfig(
+    defaultValues: ImageViewerConfig,
+    overrideValues: ImageViewerConfig
+  ): ImageViewerConfig {
     let result: ImageViewerConfig = { ...defaultValues };
     if (overrideValues) {
       result = { ...defaultValues, ...overrideValues };
 
       if (overrideValues.btnIcons) {
-        result.btnIcons = { ...defaultValues.btnIcons, ...overrideValues.btnIcons };
+        result.btnIcons = {
+          ...defaultValues.btnIcons,
+          ...overrideValues.btnIcons,
+        };
       }
     }
     return result;
   }
-
 }

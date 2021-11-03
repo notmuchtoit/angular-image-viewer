@@ -1,25 +1,22 @@
-
 # Angular Image Viewer
-
-demo: https://clarivate.github.io/angular-image-viewer/
 
 A configurable Angular image viewer component, compatible with Angular 9
 
 ## Features:
- * Compatible with Angular 9
- * Configurable
- * Rotate image
- * Zoom image
- * Drag to move image
- * Toggle Full Screen mode
 
+- Compatible with Angular 9
+- Configurable
+- Rotate image
+- Zoom image
+- Drag to move image
+- Toggle Full Screen mode
 
 ## Set up
 
 To use default configuration, simply import the ImageViewerModule into your module, like so:
 
 ```javascript
-import { AngularImageViewerModule } from "@clarivate/angular-image-viewer";
+import { AngularImageViewerModule } from "@notmuchtoit/angular-image-viewer";
 
 @NgModule({
   //...
@@ -35,7 +32,10 @@ Then, add the component to your template, providing an array of image URLs. You 
 
 ```html
 <div class="container">
-  <angular-image-viewer  [src]="images" [(index)]="imageIndex"></angular-image-viewer>
+  <angular-image-viewer
+    [src]="images"
+    [(index)]="imageIndex"
+  ></angular-image-viewer>
 </div>
 ```
 
@@ -86,12 +86,14 @@ The configuration object is structured as below. All values are optional, and if
 };
 ```
 
-To add additional buttons use the following 
+To add additional buttons use the following
 
-```html 
-<angular-image-viewer [src]="images" 
-                  [config]="{customBtns:[{name: 'link', icon: 'fa fa-paperclip'}]}"
-                  (customImageEvent)="handleEvent($event)">
+```html
+<angular-image-viewer
+  [src]="images"
+  [config]="{customBtns:[{name: 'link', icon: 'fa fa-paperclip'}]}"
+  (customImageEvent)="handleEvent($event)"
+>
 </angular-image-viewer>
 ```
 
@@ -109,11 +111,8 @@ handleEvent(event: customImageEvent) {
 
 ## Local setup for this branch:
 
-* Add respective version of this component. yarn add @clarivate/angular-image-viewer.
-* yarn serve-lib is to compile your changes in projects\angular-image-viewer and it will update in dist folder. But to reflect in UI, update projects\angular-image-viewer\ng-package.json file dest to node_module location. "dest": "../../node_modules/@clarivate/angular-image-viewer",
-* yarn start to get the application up.
+- Add respective version of this component. yarn add @notmuchtoit/angular-image-viewer.
+- yarn serve-lib is to compile your changes in projects\angular-image-viewer and it will update in dist folder. But to reflect in UI, update projects\angular-image-viewer\ng-package.json file dest to node_module location. "dest": "../../node_modules/@notmuchtoit/angular-image-viewer",
+- yarn start to get the application up.
 
-
-Note: This package is built using the idea from ngx-image-viewer(https://github.com/jpilfold/ngx-image-viewer). It has advantage that it uses latest dependencies which fixes Issue #23 & #29  i.e related to FullScreen Image. 
-
-
+Note: This package is built using the idea from ngx-image-viewer(https://github.com/jpilfold/ngx-image-viewer) and clarivate's version https://github.com/clarivate/angular-image-viewer. It has advantage that it uses latest dependencies which fixes Issue #23 & #29 i.e related to FullScreen Image.

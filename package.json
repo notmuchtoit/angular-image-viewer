@@ -1,6 +1,6 @@
 {
-  "name": "@clarivate/angular-image-viewer",
-  "version": "2.0.7",
+  "name": "@notmuchtoit/angular-image-viewer",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -25,6 +25,7 @@
     "rxjs": "~6.5.4",
     "screenfull": "^5.0.0",
     "tslib": "^1.10.0",
+    "yarn": "^1.22.17",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
@@ -54,14 +55,14 @@
   "main": "karma.conf.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/clarivate/angular-image-viewer.git"
+    "url": "git+https://github.com/notmuchtoit/angular-image-viewer.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/clarivate/angular-image-viewer/issues"
+    "url": "https://github.com/notmuchtoit/angular-image-viewer/issues"
   },
-  "homepage": "https://github.com/clarivate/angular-image-viewer#readme",
+  "homepage": "https://github.com/notmuchtoit/angular-image-viewer#readme",
   "directories": {
     "doc": "docs"
   }
