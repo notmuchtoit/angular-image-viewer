@@ -1,6 +1,6 @@
 {
-  "name": "@notmuchtoit/angular-image-viewer",
-  "version": "1.0.0",
+  "name": "notmuchtoit-angular-image-viewer",
+  "version": "1.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~9.1.12",
     "@angular/router": "~9.1.12",
     "font-awesome": "^4.7.0",
+    "notmuchtoit-angular-image-viewer": "^1.0.0",
     "rxjs": "~6.5.4",
     "screenfull": "^5.0.0",
     "tslib": "^1.10.0",
