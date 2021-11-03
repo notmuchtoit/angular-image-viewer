@@ -16,7 +16,7 @@ A configurable Angular image viewer component, compatible with Angular 9
 To use default configuration, simply import the ImageViewerModule into your module, like so:
 
 ```javascript
-import { AngularImageViewerModule } from "@notmuchtoit/angular-image-viewer";
+import { AngularImageViewerModule } from "notmuchtoit-angular-image-viewer";
 
 @NgModule({
   //...
@@ -111,8 +111,10 @@ handleEvent(event: customImageEvent) {
 
 ## Local setup for this branch:
 
-- Add respective version of this component. yarn add @notmuchtoit/angular-image-viewer.
-- yarn serve-lib is to compile your changes in projects\angular-image-viewer and it will update in dist folder. But to reflect in UI, update projects\angular-image-viewer\ng-package.json file dest to node_module location. "dest": "../../node_modules/@notmuchtoit/angular-image-viewer",
+- Add respective version of this component. yarn add notmuchtoit-angular-image-viewer.
+- yarn serve-lib is to compile your changes in projects\angular-image-viewer and it will update in dist folder. But to reflect in UI, update projects\angular-image-viewer\ng-package.json file dest to node_module location. "dest": "../../node_modules/notmuchtoit-angular-image-viewer",
 - yarn start to get the application up.
 
-Note: This package is built using the idea from ngx-image-viewer(https://github.com/jpilfold/ngx-image-viewer) and clarivate's version https://github.com/clarivate/angular-image-viewer. It has advantage that it uses latest dependencies which fixes Issue #23 & #29 i.e related to FullScreen Image.
+Note: This package is built using the idea from ngx-image-viewer(https://github.com/jpilfold/ngx-image-viewer) and clarivate's version https://github.com/clarivate/angular-image-viewer. It has advantage that it uses latest dependencies which fixes Issue #23 & #29 i.e related to
+FullScreen Image.
+Added an emitter to send up event to client when the file is not present.

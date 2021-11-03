@@ -19,10 +19,10 @@
       "dom"
     ],
     "paths": {
-      "@notmuchtoit/angular-image-viewer": [
+      "notmuchtoit-angular-image-viewer": [
         "dist/angular-image-viewer"
       ],
-      "@notmuchtoit/angular-image-viewer/*": [
+      "notmuchtoit-angular-image-viewer/*": [
         "dist/angular-image-viewer/*"
       ]
     }

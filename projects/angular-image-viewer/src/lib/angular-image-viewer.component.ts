@@ -84,7 +84,7 @@ export class AngularImageViewerComponent implements OnInit, OnChanges {
   customImageEvent: EventEmitter<CustomImageEvent> = new EventEmitter();
 
   @Output()
-  imageNotFoundEvent = new EventEmitter();
+  imageNotFoundEvent = new EventEmitter<number>();
 
   styleHeight = "98vh";
 
@@ -177,7 +177,8 @@ export class AngularImageViewerComponent implements OnInit, OnChanges {
   }
 
   imageNotFound() {
-    this.imageNotFoundEvent.emit();
+    this.loading = false;
+    this.imageNotFoundEvent.emit(this.index);
   }
 
   onDragStart(evt) {

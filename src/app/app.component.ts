@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import {
   ImageViewerConfig,
   CustomImageEvent,
-} from "@notmuchtoit/angular-image-viewer";
+} from "notmuchtoit-angular-image-viewer";
 
 @Component({
   selector: "app-root",

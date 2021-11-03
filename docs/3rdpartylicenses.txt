@@ -91,7 +91,7 @@ MIT
 @angular/router
 MIT
 
-@notmuchtoit/angular-image-viewer
+notmuchtoit-angular-image-viewer
 MIT
 
 core-js
